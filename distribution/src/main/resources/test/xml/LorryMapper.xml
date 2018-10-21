@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.dao.LorryMapper">
+  <resultMap id="BaseResultMap" type="nf.com.model.Lorry">
+    <id column="LorryID" jdbcType="VARCHAR" property="lorryid" />
+    <result column="LorryModel" jdbcType="VARCHAR" property="lorrymodel" />
+    <result column="LorryCO" jdbcType="VARCHAR" property="lorryco" />
+    <result column="PathID" jdbcType="VARCHAR" property="pathid" />
+    <result column="LorryYield" jdbcType="TIMESTAMP" property="lorryyield" />
+    <result column="LorryBuy" jdbcType="TIMESTAMP" property="lorrybuy" />
+    <result column="yieldNotes" jdbcType="VARCHAR" property="yieldnotes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from lorry
+    where LorryID = #{lorryid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="nf.com.model.Lorry">
+    insert into lorry (LorryID, LorryModel, LorryCO, 
+      PathID, LorryYield, LorryBuy, 
+      yieldNotes)
+    values (#{lorryid,jdbcType=VARCHAR}, #{lorrymodel,jdbcType=VARCHAR}, #{lorryco,jdbcType=VARCHAR}, 
+      #{pathid,jdbcType=VARCHAR}, #{lorryyield,jdbcType=TIMESTAMP}, #{lorrybuy,jdbcType=TIMESTAMP}, 
+      #{yieldnotes,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="nf.com.model.Lorry">
+    update lorry
+    set LorryModel = #{lorrymodel,jdbcType=VARCHAR},
+      LorryCO = #{lorryco,jdbcType=VARCHAR},
+      PathID = #{pathid,jdbcType=VARCHAR},
+      LorryYield = #{lorryyield,jdbcType=TIMESTAMP},
+      LorryBuy = #{lorrybuy,jdbcType=TIMESTAMP},
+      yieldNotes = #{yieldnotes,jdbcType=VARCHAR}
+    where LorryID = #{lorryid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select LorryID, LorryModel, LorryCO, PathID, LorryYield, LorryBuy, yieldNotes
+    from lorry
+    where LorryID = #{lorryid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select LorryID, LorryModel, LorryCO, PathID, LorryYield, LorryBuy, yieldNotes
+    from lorry
+  </select>
+</mapper>
